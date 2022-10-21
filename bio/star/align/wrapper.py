@@ -62,6 +62,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
         " --runThreadN {snakemake.threads}"
         " --genomeDir {index}"
         " --readFilesIn {input_str}"
+        " --outSAMunmapped Within"
         " {readcmd}"
         " {extra}"
         " {quant}"
@@ -72,6 +73,8 @@ with tempfile.TemporaryDirectory() as tmpdir:
         " {log}"
     )
 
+    if snakemake.output.get("trn"):
+        shell("cat {tmpdir}/Aligned.toTranscriptome.out.bam > {snakemake.output.trn:q}")
     if snakemake.output.get("reads_per_gene"):
         shell("cat {tmpdir}/ReadsPerGene.out.tab > {snakemake.output.reads_per_gene:q}")
     if snakemake.output.get("chim_junc"):
