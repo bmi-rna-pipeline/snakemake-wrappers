@@ -10,6 +10,7 @@ from snakemake.shell import shell
 
 
 extra = snakemake.params.get("extra", "")
+quant = snakemake.params.get("quant", "")
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
 
@@ -56,6 +57,7 @@ else:
     stdout = "SAM"
 
 
+
 with tempfile.TemporaryDirectory() as tmpdir:
     shell(
         "STAR "
@@ -64,6 +66,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
         " --readFilesIn {input_str}"
         " {readcmd}"
         " {extra}"
+        " {quant}"
         " --outTmpDir {tmpdir}/STARtmp"
         " --outFileNamePrefix {tmpdir}/"
         " --outStd {stdout}"
