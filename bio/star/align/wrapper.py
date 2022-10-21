@@ -49,14 +49,12 @@ if not index:
     index = snakemake.params.get("idx", "")
 
 
-if "--outSAMtype BAM SortedByCoordinate" in extra:
-    stdout = "BAM_SortedByCoordinate"
-elif "BAM Unsorted" in extra:
-    stdout = "BAM_Unsorted"
-else:
-    stdout = "SAM"
-
-
+# if "--outSAMtype BAM SortedByCoordinate" in extra:
+#     stdout = "BAM_SortedByCoordinate"
+# elif "BAM Unsorted" in extra:
+#     stdout = "BAM_Unsorted"
+# else:
+#     stdout = "SAM"
 
 with tempfile.TemporaryDirectory() as tmpdir:
     shell(
@@ -69,8 +67,8 @@ with tempfile.TemporaryDirectory() as tmpdir:
         " {quant}"
         " --outTmpDir {tmpdir}/STARtmp"
         " --outFileNamePrefix {tmpdir}/"
-        " --outStd {stdout}"
-        " > {snakemake.output.aln}"
+        " --outSAMheaderCommentFile commentsENCODElong.txt"
+        " --outSAMheaderHD @HD VN:1.4 SO:coordinate"
         " {log}"
     )
 
