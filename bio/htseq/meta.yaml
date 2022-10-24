@@ -1,0 +1,12 @@
+name: htseq count
+description: |
+        Run htseq count to quantify aligned or mapped data
+authors:
+  - Seo Yoon Park
+input:
+  - reference gtf file
+  - bam/sam file aligned to transcriptome
+output:
+  - htseq gene count files
+notes: |
+  * For more information, see https://htseq.readthedocs.io/en/master/htseqcount.html.
