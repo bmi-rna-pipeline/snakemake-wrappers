@@ -17,7 +17,7 @@ if bam:
 elif sam:
     input_bam = "-f sam"
     input_string = sam
-else:
+elif bam == "" and sam == "":
     raise Exception("Expected input.bam or input.sam, got neither.")
 
 
