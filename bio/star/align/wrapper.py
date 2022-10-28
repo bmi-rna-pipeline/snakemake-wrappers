@@ -68,8 +68,6 @@ with tempfile.TemporaryDirectory() as tmpdir:
         " {quant}"
         " --outTmpDir {tmpdir}/STARtmp"
         " --outFileNamePrefix {tmpdir}/"
-        " --outSAMheaderCommentFile commentsENCODElong.txt"
-        " --outSAMheaderHD @HD VN:1.4 SO:coordinate"
         " --outStd {stdout}"
         " > {snakemake.output.aln}"
         " {log}"
