@@ -62,7 +62,7 @@ if not snakemake.output.isoforms_results.endswith(".isoforms.results"):
         "(rsem will append .isoforms.results suffix)"
     )
 
-reference_prefix = snakemake.params.get("pref", "")
+# reference_prefix = snakemake.params.get("pref", "")
 
 extra = snakemake.params.get("extra", "")
 threads = snakemake.threads
@@ -70,6 +70,6 @@ log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 shell(
     "rsem-calculate-expression --num-threads {snakemake.threads} {extra} "
     "{paired_end_string} {input_bam} {input_string} "
-    "{reference_prefix} {output_prefix} "
+    "{output_prefix} "
     "{log}"
 )
