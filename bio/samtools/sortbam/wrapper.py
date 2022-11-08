@@ -19,12 +19,12 @@ with tempfile.TemporaryDirectory() as tmpdir:
     tmp_prefix = Path(tmpdir) / "samtools_fastq.sort_"
 
     shell(
-        "cat <( samtools view -H {inputbam} )"
-        " <( samtools view -@ {snakemake.threads} {inputbam}"
-        " | awk '{printf "%s", $0 " "; getline; print}'"
-        " | sort -S 50G -T {tmp_prefix}"
-        " | tr ' ' '\n' )"
-        " | samtools view"
-        " -@ {snakemake.threads} -bS -> {outbam}"
+        "cat <(samtools view -H {inputbam}) \
+        <(samtools view -@ {snakemake.threads} {inputbam} \
+        | awk '{printf "%s", $0 ""; getline; print}' \
+        | sort -S 50G -T {tmp_prefix} \
+        | tr \n') \
+        | samtools view \
+        -@ {snakemake.threads} -bS -> {outbam}"
         " {log}"
         )
