@@ -21,7 +21,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
 shell(
     "cat <( samtools view -H {inputbam} )"
     " <( samtools view -@ 12 {inputbam}"
-    " | awk '{printf '%s', $0 ' '; getline; print}'"
+    " | awk '{printf \"%s\", $0 \"\"; getline; print}'"
     " | sort -S 50G -T {tmp_prefix}"
     " | tr ' ' '\n' )"
     " | samtools view"
