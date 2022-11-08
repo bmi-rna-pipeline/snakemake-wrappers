@@ -14,6 +14,7 @@ outbam = snakemake.output.sortedout
 
 samtools_opts = get_samtools_opts(snakemake)
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
+awk = '| awk''{printf "%s", $0 ""; getline; print}'
 
 with tempfile.TemporaryDirectory() as tmpdir:
     tmp_prefix = Path(tmpdir) / "samtools_fastq.sort_"
@@ -21,7 +22,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
 shell(
     "cat <( samtools view -H {inputbam} )"
     " <( samtools view -@ 12 {inputbam}"
-    " | awk '{printf \"%s\", $0 \"\"; getline; print}'"
+    " {awk}"
     " | sort -S 50G -T {tmp_prefix}"
     " | tr ' ' '\n' )"
     " | samtools view"
