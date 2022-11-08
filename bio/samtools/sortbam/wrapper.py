@@ -20,12 +20,11 @@ with tempfile.TemporaryDirectory() as tmpdir:
 
     shell(
         "cat <( samtools view -H {inputbam} )"
-        " <( samtools view -@ 12 {inputbam}"
+        " <( samtools view -@ {snakemake.threads} {inputbam}"
         " | awk '{printf "%s", $0 " "; getline; print}'"
         " | sort -S 50G -T {tmp_prefix}"
         " | tr ' ' '\n' )"
         " | samtools view"
-        " -@ 12 -bS -"
-        " > {outbam}"
+        " -@ {snakemake.threads} -bS -> {outbam}"
         " {log}"
         )
