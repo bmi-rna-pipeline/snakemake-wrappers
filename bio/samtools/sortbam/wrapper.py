@@ -27,6 +27,6 @@ with tempfile.TemporaryDirectory() as tmpdir:
         """ | sort -S 50G -T {tmp_prefix}"""
         """ | tr ' ' '\n' )"""
         """ | samtools view"""
-        """ -@ 12 -bS -> {outbam}"""
+        """ -@ 12 -bS - > {outbam}"""
         """ {log}"""
     )
